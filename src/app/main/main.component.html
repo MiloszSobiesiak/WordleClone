@@ -1,0 +1,9 @@
+<div class ="main" >
+    <div class="inputs" *ngFor="let a of htmlcounter;let indx = index" >
+        <input #txt1 type="text" [disabled]="disabled[indx][0]" [ngStyle]="{'background-color':colors[indx][0]}" maxlength="1" [(ngModel)]="letters[indx][0]" (keyup)="move($event, '' , txt1 , txt2, 0)">
+        <input #txt2 type="text" [disabled]="disabled[indx][1]" [ngStyle]="{'background-color':colors[indx][1]}"maxlength="1" [(ngModel)]="letters[indx][1]" (keyup)="move($event, txt1 , txt2 , txt3,0)">
+        <input #txt3 type="text" [disabled]="disabled[indx][2]" [ngStyle]="{'background-color':colors[indx][2]}"  maxlength="1" [(ngModel)]="letters[indx][2]" (keyup)="move($event, txt2 , txt3 , txt4,0)">
+        <input #txt4 type="text" [disabled]="disabled[indx][3]" [ngStyle]="{'background-color':colors[indx][3]}"  maxlength="1" [(ngModel)]="letters[indx][3]" (keyup)="move($event, txt3 , txt4 , txt5,0)">
+        <input #txt5 type="text" [disabled]="disabled[indx][4]" [ngStyle]="{'background-color':colors[indx][4]}"maxlength="1" [(ngModel)]="letters[indx][4]"  (keyup)="move($event, txt4 , txt5 , txt1,1)">
+    </div>
+</div>
