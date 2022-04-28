@@ -2,6 +2,7 @@ declare var require: any
 var randomWords = require('random-words');
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -9,13 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  letters: any = [['','','','',''],['','','','',''],['','','','',''],['','','','',''],['','','','','']]
-  colors = [['white','white','white','white','white'],['white','white','white','white','white'],['white','white','white','white','white'],['white','white','white','white','white'],['white','white','white','white','white']]
-  disabled=[[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false]]
+  letters: any = [['','','','',''],['','','','',''],['','','','',''],['','','','',''],['','','','',''],['','','','','']]
+  colors = [['white','white','white','white','white'],['white','white','white','white','white'],['white','white','white','white','white'],['white','white','white','white','white'],['white','white','white','white','white'],['white','white','white','white','white']]
+  disabled=[[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false]]
   word:string='';
+  guessedword: string = ''
   splited:string[]=[]
   count:number=0;
   htmlcounter:number[]=[0]
+  userdata:any;
   constructor() { }
 
   ngOnInit(): void {
@@ -23,10 +26,9 @@ export class MainComponent implements OnInit {
       this.word=randomWords({exactly: 1, minLength: 4, maxLength: 6})
       this.splited = this.word[0].split('')
       if(this.splited.length!=5){
-        console.log("Jeszcze raz")
       }
       else{
-        console.log(this.word, this.splited, this.splited.length)
+        console.log(this.word)
         break
       }
 
@@ -56,16 +58,14 @@ export class MainComponent implements OnInit {
   }
 
   check(){
-    for(let i =0; i<=4 ; i++){
-      for(let j =0; j<=4 ; j++){
+    for(let i =0; i<=5 ; i++){
+      for(let j =0; j<=5 ; j++){
         if(this.letters[this.count][i]===this.splited[j]){
           if(i==j){
             this.colors[this.count][i]='green'
-            console.log("kolor zielony-","Litera podana=",this.letters[this.count][i],", Litera zgadywana=",this.splited[j] , this.count, i , j)
           }
           else{
             this.colors[this.count][i]='yellow'
-            console.log("kolor żółty-","Litera podana=",this.letters[this.count][i],", Litera zgadywana=",this.splited[j] , this.count, i , j)
           }
         }
         else{
@@ -73,8 +73,14 @@ export class MainComponent implements OnInit {
       }
       this.disabled[this.count][i]=true;
     }
-    this.count = this.count+1;
-    this.htmlcounter.push(this.count)
+    this.guessedword=this.letters[this.count].join('')
+    if(this.guessedword==this.word[0] || this.count==5){
+    }
+    else{
+      this.count = this.count+1;
+      this.htmlcounter.push(this.count)
+    }
+
   }
 
 }
